@@ -6,13 +6,13 @@ RATING_CHOICES = (('1', 1), ('2', 2), ('3', 3), ('4', 4), ('5', 5))
 
 
 class User(models.Model):
-    user_id = models.IntegerField(primary_key=True, null=False)
+    user_id = models.AutoField(primary_key=True)
     fname = models.CharField(max_length=16, default='', unique=False)
     lname = models.CharField(max_length=32, default='', unique=False)
     address = models.CharField(max_length=64, default='', unique=False)
     user_type = models.CharField(max_length=1, default='C', unique=False)
     DOB = models.DateField()
-    email = models.CharField(max_length=15, unique=True, null=False)
+    email = models.CharField(max_length=30, unique=True, null=False)
     phone_number = models.CharField(max_length=10, null=False)
     created_at = models.DateTimeField(auto_now_add=True)
     username = models.CharField(max_length=16, null=False, unique=True)
@@ -20,14 +20,15 @@ class User(models.Model):
 
 
 class Customer(models.Model):
-    customer_id = models.IntegerField(null=False, primary_key=True)
+    customer_id = models.AutoField(primary_key=True)
     u_ID = models.ForeignKey(User, on_delete=models.CASCADE)
     credit_info = models.CharField(max_length=16, null=False, unique=False)
     CSV = models.CharField(max_length=6, null=False, unique=False)
+    logged_in =  models.IntegerField(null= False, default=0)
 
 
 class Mechanic(models.Model):
-    mechanic_id = models.IntegerField(null=False, primary_key=True)
+    mechanic_id = models.AutoField(primary_key=True)
     u_ID = models.ForeignKey(User, on_delete=models.CASCADE)
     rating = models.IntegerField(null=False)
     checking_account = models.CharField(max_length=32, null=False)
@@ -36,7 +37,7 @@ class Mechanic(models.Model):
 
 
 class Vehicle(models.Model):
-    vehicle_id = models.IntegerField(primary_key=True, null=False)
+    vehicle_id = models.AutoField(primary_key=True)
     c_id = models.ForeignKey(Customer, on_delete=models.CASCADE)
     make = models.CharField(max_length=32, null=False, default='')
     model = models.CharField(max_length=32, null=False, default='')
@@ -47,7 +48,7 @@ class Vehicle(models.Model):
 
 
 class Services(models.Model):
-    service_id = models.IntegerField(primary_key=True, null=False)
+    service_id = models.AutoField(primary_key=True)
     name = models.CharField(max_length=32, null=False, unique=True)
     cost = models.FloatField(null=False, default=24.99)
 
@@ -58,14 +59,14 @@ class Mechanic_Service_Relation(models.Model):
 
 
 class Current_Jobs(models.Model):
-    job_id = models.IntegerField(primary_key=True, null=False)
+    job_id = models.AutoField(primary_key=True)
     c_id = models.ForeignKey(Customer, on_delete=models.CASCADE)
     s_id = models.ForeignKey(Services, on_delete=models.CASCADE)
     state = models.CharField(max_length=16, choices=JOB_CHOICES)
 
 
 class Reviews(models.Model):
-    review_id = models.IntegerField(primary_key=True, null=False)
+    review_id = models.AutoField(primary_key=True)
     c_id = models.ForeignKey(Customer, on_delete=models.CASCADE)
     m_id = models.ForeignKey(Mechanic, on_delete=models.CASCADE)
     description = models.CharField(max_length=140)
