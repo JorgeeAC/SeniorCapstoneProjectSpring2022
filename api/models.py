@@ -31,7 +31,8 @@ class Customer(models.Model):
     logged_in = models.IntegerField(null= False, default=0)
 
     def __str__(self):
-        return self.customer_id, self.u_ID.__str__()
+        return (f'{self.customer_id}'
+                f'{self.u_ID.__str__()}')
 
 class Mechanic(models.Model):
     mechanic_id = models.AutoField(primary_key=True)
@@ -42,7 +43,8 @@ class Mechanic(models.Model):
     available = models.BooleanField(default=False, null=False)
 
     def __str__(self):
-        return self.mechanic_id, self.u_ID.__str__()
+        return (f'{self.mechanic_id}' 
+                f'{self.u_ID.__str__()}')
 
 
 class Vehicle(models.Model):
@@ -72,7 +74,8 @@ class Mechanic_Service_Relation(models.Model):
     s_id = models.ForeignKey(Services, on_delete=models.CASCADE)
 
     def __str__(self):
-        return self.m_id.u_ID.__str__(), self.s_id.name
+        return (f'{self.m_id.u_ID.__str__()}' 
+                f'{self.s_id.name}')
 
 class Current_Jobs(models.Model):
     job_id = models.AutoField(primary_key=True)
@@ -81,7 +84,8 @@ class Current_Jobs(models.Model):
     state = models.CharField(max_length=16, choices=JOB_CHOICES)
 
     def __str__(self):
-        return self.job_id, self.c_id.u_ID.__str__()
+        return (f'{self.job_id}' 
+                f'{self.c_id.u_ID.__str__()}')
 
 
 class Reviews(models.Model):
@@ -92,4 +96,4 @@ class Reviews(models.Model):
     rating = models.IntegerField(choices=RATING_CHOICES)
 
     def __str__(self):
-        return self.review_id, self.m_id.u_ID.__str__()
+        return (f'{self.review_id}', f'{self.m_id.u_ID.__str__()}')
