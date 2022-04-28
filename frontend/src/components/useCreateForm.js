@@ -39,6 +39,9 @@ const useCreateForm = (callback, validate) => {
       UserAdapter.createUser(UserSerializer.serializeUser(values))
         .then(response => response.json())
         .then(response => {
+            // JWT_ADD: Should get JWT Token back instead of user_id. 
+            // Set the JWT token into the localstorage in place of user_id.
+
             localStorage.setItem('user_id', response.user_id);
             navigate(`/profile`);
         }).catch(console.log)

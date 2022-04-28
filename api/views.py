@@ -13,7 +13,9 @@ class UserList(generics.ListCreateAPIView):
     def create(self, request):
         serializer = CreateUserSerializer(data = request.data)
         if serializer.is_valid():
+            # Hash user's password
             user = serializer.save()
+            # JWT_ADD: Send over JWT Token
             return Response(UserSerializer(user).data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
