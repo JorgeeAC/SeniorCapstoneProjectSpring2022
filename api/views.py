@@ -1,25 +1,49 @@
-from .models import User
-from .serializers import UserSerializer, CreateUserSerializer
-from rest_framework import generics, views
+from .models import *
+from .serializers import *
+from rest_framework import generics
 from rest_framework.response import Response
 from rest_framework import status
 
 # Create your views here.
 
-class UserList(views.APIView):
-    def get(self, request):
-        users = User.objects.all()
-        serializer = UserSerializer(users, many=True)
-        return Response(serializer.data)
+class UserList(generics.ListCreateAPIView):
+    queryset = User.objects.all()
+    serializer_class = UserSerializer     
 
-    def post(self, request):
+    def create(self, request):
         serializer = CreateUserSerializer(data = request.data)
         if serializer.is_valid():
-            serializer.save()
-            return Response(serializer.data, status=status.HTTP_201_CREATED)
+            user = serializer.save()
+            return Response(UserSerializer(user).data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 class UserDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = User.objects.all()
     serializer_class = UserSerializer
     lookup_field = 'user_id'
+
+
+class VehicleView(generics.CreateAPIView):
+    queryset = Vehicle.objects.all()
+    serializer_class = VehicleSerializer
+
+
+class CustomerView(generics.CreateAPIView):
+    queryset = Customer.objects.all()
+    serializer_class = CustomerSerializer
+
+
+class MechanicView(generics.CreateAPIView):
+    queryset = Mechanic.objects.all()
+    serializer_class = MechanicSerializer
+
+
+class JobsView(generics.CreateAPIView):
+    queryset = Current_Jobs
+    serializer_class = JobsSerializer
+
+
+class ReviewView(generics.CreateAPIView):
+    queryset = Reviews
+    serializer_class = ReviewsSerializer
+
