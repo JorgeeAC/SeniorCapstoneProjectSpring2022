@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import UserAdapter from "../adapters/UserAdapter";
 import UserSerializer from "../serializers/User";
 import { useNavigate } from "react-router-dom";
@@ -32,17 +32,17 @@ const useCreateForm = (callback, validate) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    setErrors(validate(values));
+    const localErrors = validate(values);
+    setErrors(localErrors);
 
-    UserAdapter.createUser(UserSerializer.serializeUser(values))
-      .then(response => response.json())
-      .then(response => {
-        if (Object.keys(errors).length === 0){
-          localStorage.setItem('user_id', response.user_id);
-          navigate(`/profile`);
-        } else { console.log(errors) }
-      })
-      .catch(console.log)
+    if (Object.keys(localErrors).length === 0){
+      UserAdapter.createUser(UserSerializer.serializeUser(values))
+        .then(response => response.json())
+        .then(response => {
+            localStorage.setItem('user_id', response.user_id);
+            navigate(`/profile`);
+        }).catch(console.log)
+      }
   };
 
 
