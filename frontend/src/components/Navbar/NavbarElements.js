@@ -7,9 +7,9 @@ import {Link as LinkScroll} from 'react-scroll';
 //Stock components will go here that will communicate with index.js
 //Properties will be written here just like in typical css
 export const Nav = styled.nav`
-    background: #000;
+    background: ${({scrollNav}) => (scrollNav ? '#000' : 'transparent')};
     height: 80px;
-    /* margin-top: -80px; */
+    margin-top: -80px; 
     display: flex;
     justify-content: center;
     align-items: center;
