@@ -1,8 +1,12 @@
 import { useState, useEffect } from "react";
 import UserAdapter from "../adapters/UserAdapter";
 import UserSerializer from "../serializers/User";
+import { useNavigate } from "react-router-dom";
 
 const useCreateForm = (callback, validate) => {
+
+  const navigate = useNavigate();
+
   const [values, setValues] = useState({
     firstName: "",
     lastName: "",
@@ -18,8 +22,6 @@ const useCreateForm = (callback, validate) => {
 
   const [errors, setErrors] = useState({});
 
-  const [isSubmitting, setIsSubmitting] = useState(false);
-
   const handleChange = (e) => {
     const { name, value } = e.target;
     setValues({
@@ -31,22 +33,18 @@ const useCreateForm = (callback, validate) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     setErrors(validate(values));
-    setIsSubmitting(true);
 
     UserAdapter.createUser(UserSerializer.serializeUser(values))
       .then(response => response.json())
-      .then(console.log)
+      .then(response => {
+        if (Object.keys(errors).length === 0){
+          localStorage.setItem('user_id', response.user_id);
+          navigate(`/profile`);
+        } else { console.log(errors) }
+      })
       .catch(console.log)
-
-      // TODO: Get a session key and store in localStorage.
-      // Route to User's Page
   };
 
-  useEffect(() => {
-    if (Object.keys(errors).length === 0 && isSubmitting) {
-      callback();
-    }
-  }, [errors]);
 
   return { handleChange, values, handleSubmit, errors };
 };

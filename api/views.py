@@ -22,10 +22,4 @@ class UserList(views.APIView):
 class UserDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = User.objects.all()
     serializer_class = UserSerializer
-
-
-
-
-
-
-
+    lookup_field = 'user_id'
