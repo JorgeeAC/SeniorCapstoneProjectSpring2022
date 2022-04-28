@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import UserAdapter from "../adapters/UserAdapter";
+import UserSerializer from "../serializers/User";
 
 const useCreateForm = (callback, validate) => {
   const [values, setValues] = useState({
@@ -32,10 +33,13 @@ const useCreateForm = (callback, validate) => {
     setErrors(validate(values));
     setIsSubmitting(true);
 
-    // Response from backend
-    UserAdapter.createUser(values)
+    UserAdapter.createUser(UserSerializer.serializeUser(values))
       .then(response => response.json())
       .then(console.log)
+      .catch(console.log)
+
+      // TODO: Get a session key and store in localStorage.
+      // Route to User's Page
   };
 
   useEffect(() => {
