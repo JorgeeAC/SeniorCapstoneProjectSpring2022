@@ -23,13 +23,17 @@
     "webpack-cli": "^4.9.2"
   },
   "dependencies": {
-    "@fortawesome/react-fontawesome": "^0.1.18",
     "@babel/plugin-proposal-class-properties": "^7.16.7",
+    "@fortawesome/react-fontawesome": "^0.1.18",
+    "@material-ui/core": "^4.12.3",
+    "@material-ui/icons": "^4.11.2",
+    "css-loader": "^6.7.1",
+    "file-loader": "^6.2.0",
     "react-icons": "^4.3.1",
     "react-router-dom": "^6.3.0",
-    "@material-ui/core": "^4.12.3",
     "react-scroll": "^1.8.7",
+    "style-loader": "^3.3.1",
     "styled-components": "^5.3.5",
-    "@material-ui/icons": "^4.11.2"
+    "url-loader": "^4.1.1"
   }
 }

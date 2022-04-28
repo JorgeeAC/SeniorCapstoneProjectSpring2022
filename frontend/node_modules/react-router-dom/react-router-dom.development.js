@@ -1,5 +1,5 @@
 /**
- * React Router DOM v6.2.2
+ * React Router DOM v6.3.0
  *
  * Copyright (c) Remix Software Inc.
  *
@@ -12,6 +12,11 @@ import { useRef, useState, useLayoutEffect, createElement, forwardRef, useCallba
 import { createBrowserHistory, createHashHistory } from 'history';
 import { Router, useHref, createPath, useLocation, useResolvedPath, useNavigate } from 'react-router';
 export { MemoryRouter, Navigate, NavigationType, Outlet, Route, Router, Routes, UNSAFE_LocationContext, UNSAFE_NavigationContext, UNSAFE_RouteContext, createPath, createRoutesFromChildren, generatePath, matchPath, matchRoutes, parsePath, renderMatches, resolvePath, useHref, useInRouterContext, useLocation, useMatch, useNavigate, useNavigationType, useOutlet, useOutletContext, useParams, useResolvedPath, useRoutes } from 'react-router';
+
+/**
+ * NOTE: If you refactor this to split up the modules into separate files,
+ * you'll need to update the rollup config for react-router-dom-v5-compat.
+ */
 
 function warning(cond, message) {
   if (!cond) {

@@ -1,3 +1,7 @@
+/**
+ * NOTE: If you refactor this to split up the modules into separate files,
+ * you'll need to update the rollup config for react-router-dom-v5-compat.
+ */
 import * as React from "react";
 import type { History } from "history";
 import { MemoryRouter, Navigate, Outlet, Route, Router, Routes, createRoutesFromChildren, generatePath, matchRoutes, matchPath, createPath, parsePath, resolvePath, renderMatches, useHref, useInRouterContext, useLocation, useMatch, useNavigate, useNavigationType, useOutlet, useParams, useResolvedPath, useRoutes, useOutletContext } from "react-router";
@@ -53,7 +57,7 @@ export interface LinkProps extends Omit<React.AnchorHTMLAttributes<HTMLAnchorEle
  */
 export declare const Link: React.ForwardRefExoticComponent<LinkProps & React.RefAttributes<HTMLAnchorElement>>;
 export interface NavLinkProps extends Omit<LinkProps, "className" | "style" | "children"> {
-    children: React.ReactNode | ((props: {
+    children?: React.ReactNode | ((props: {
         isActive: boolean;
     }) => React.ReactNode);
     caseSensitive?: boolean;
