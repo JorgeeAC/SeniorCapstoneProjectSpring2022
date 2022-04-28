@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import UserAdapter from "../adapters/UserAdapter";
 
 const useCreateForm = (callback, validate) => {
   const [values, setValues] = useState({
@@ -30,7 +31,11 @@ const useCreateForm = (callback, validate) => {
     e.preventDefault();
     setErrors(validate(values));
     setIsSubmitting(true);
-    console.log(e.target.dateOfBirth.value);
+
+    // Response from backend
+    UserAdapter.createUser(values)
+      .then(response => response.json())
+      .then(console.log)
   };
 
   useEffect(() => {

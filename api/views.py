@@ -1,40 +1,51 @@
+from audioop import add
 from django.shortcuts import render
-from rest_framework import generics
-from .models import User, Vehicle, Mechanic,  Current_Jobs, Reviews, Customer
-from .serializers import UserSerializer, VehicleSerializer, \
-    MechanicSerializer, JobsSerializer, ReviewsSerializer, CustomerSerializer
+from rest_framework import status
+from .models import User
+from .serializers import UserSerializer
+
+from rest_framework.views import APIView
+from rest_framework.response import Response
+from rest_framework.decorators import api_view
 
 # Create your views here.
 
 
-class UserView(generics.CreateAPIView):
-    queryset = User.objects.all()
-    serializer_class = UserSerializer
+#Get List of Users or Post
+@api_view(['GET', 'POST'])
+def users(request):
+    if request.method == 'POST':
+        query_set = User.objects.filter(email = request.data.get("email"))
+        if not query_set.exists():
+            first_name = request.data.get("firstName")
+            last_name = request.data.get("lastName")
+            password = request.data.get("password")
+            address = request.data.get("address")
+            date_of_birth = request.data.get("dateOfBirth")
+            email = request.data.get("email")
+            phone_number = request.data.get("phoneNumber")
+            user_type = request.data.get("userType")
+            username = request.data.get("username")
+
+            user = User(fname=first_name, lname=last_name, password=password, address=address, 
+                        DOB=date_of_birth, email=email, phone_number=phone_number, user_type=user_type, username=username)
+            user.save()
+
+            return Response(UserSerializer(user).data, status.HTTP_201_CREATED)
+        else: 
+            return Response({"message": "User already exists."}, status.HTTP_409_CONFLICT)
+    elif request.method == 'GET':
+        data = []
+        for user in User.objects.all():
+            data.append(UserSerializer(user).data)
+
+        return Response(data, status.HTTP_200_OK)
 
 
-class VehicleView(generics.CreateAPIView):
-    queryset = Vehicle.objects.all()
-    serializer_class = VehicleSerializer
 
 
-class CustomerView(generics.CreateAPIView):
-    queryset = Customer.objects.all()
-    serializer_class = CustomerSerializer
 
 
-class MechanicView(generics.CreateAPIView):
-    queryset = Mechanic.objects.all()
-    serializer_class = MechanicSerializer
-
-
-class JobsView(generics.CreateAPIView):
-    queryset = Current_Jobs
-    serializer_class = JobsSerializer
-
-
-class ReviewView(generics.CreateAPIView):
-    queryset = Reviews
-    serializer_class = ReviewsSerializer
 
 
 
