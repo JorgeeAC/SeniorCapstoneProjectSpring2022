@@ -1,6 +1,12 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
+import UserAdapter from "../adapters/UserAdapter";
+import UserSerializer from "../serializers/User";
+import { useNavigate } from "react-router-dom";
 
 const useCreateForm = (callback, validate) => {
+
+  const navigate = useNavigate();
+
   const [values, setValues] = useState({
     firstName: "",
     lastName: "",
@@ -16,8 +22,6 @@ const useCreateForm = (callback, validate) => {
 
   const [errors, setErrors] = useState({});
 
-  const [isSubmitting, setIsSubmitting] = useState(false);
-
   const handleChange = (e) => {
     const { name, value } = e.target;
     setValues({
@@ -28,16 +32,22 @@ const useCreateForm = (callback, validate) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    setErrors(validate(values));
-    setIsSubmitting(true);
-    console.log(e.target.dateOfBirth.value);
+    const localErrors = validate(values);
+    setErrors(localErrors);
+
+    if (Object.keys(localErrors).length === 0){
+      UserAdapter.createUser(UserSerializer.serializeUser(values))
+        .then(response => response.json())
+        .then(response => {
+            // JWT_ADD: Should get JWT Token back instead of user_id. 
+            // Set the JWT token into the localstorage in place of user_id.
+
+            localStorage.setItem('user_id', response.user_id);
+            navigate(`/profile`);
+        }).catch(console.log)
+      }
   };
 
-  useEffect(() => {
-    if (Object.keys(errors).length === 0 && isSubmitting) {
-      callback();
-    }
-  }, [errors]);
 
   return { handleChange, values, handleSubmit, errors };
 };
