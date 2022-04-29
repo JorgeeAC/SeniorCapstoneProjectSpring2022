@@ -76,7 +76,7 @@ export const FormH1 = styled.h1`
     margin-bottom: 40px;
     color: #fff;
     font-size: 20px;
-    font-wight: 400;
+    font-weight: 400;
     text-align: center;
 `
 
