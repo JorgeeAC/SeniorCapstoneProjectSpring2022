@@ -1,10 +1,24 @@
+from api.jwt import get_tokens_for_user
 from .models import *
 from .serializers import *
 from rest_framework import generics
 from rest_framework.response import Response
 from rest_framework import status
+from rest_framework_simplejwt.authentication import JWTAuthentication
 
 # Create your views here.
+
+
+def login(request):
+    username = request.data.get("username")
+    password = request.data.get("password")
+    user = JWTAuthentication.authenticate(username=username, password=password)
+
+    if user is not None:
+        user_id = User.objects.get(username=username)
+        data = get_tokens_for_user(user_id)
+        return Response(data, status=status.HTTP_200_OK)
+    return Response(status=status.HTTP_404_NOT_FOUND)
 
 class UserList(generics.ListCreateAPIView):
     queryset = User.objects.all()
@@ -15,8 +29,9 @@ class UserList(generics.ListCreateAPIView):
         if serializer.is_valid():
             # Hash user's password
             user = serializer.save()
-            # JWT_ADD: Send over JWT Token
-            return Response(UserSerializer(user).data, status=status.HTTP_201_CREATED)
+            jwt_token = get_tokens_for_user(User.objects.get(username=user.username))
+
+            return Response(jwt_token, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 class UserDetail(generics.RetrieveUpdateDestroyAPIView):

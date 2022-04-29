@@ -30,6 +30,16 @@ ALLOWED_HOSTS = []
 
 # Application definition
 
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
+    )
+}
+
+SIMPLE_JWT = {
+    'USER_ID_FIELD': 'user_id'
+}
+
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
