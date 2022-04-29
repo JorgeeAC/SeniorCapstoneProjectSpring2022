@@ -1,15 +1,28 @@
-from django.shortcuts import render
+from .models import *
+from .serializers import *
 from rest_framework import generics
-from .models import User, Vehicle, Mechanic,  Current_Jobs, Reviews, Customer
-from .serializers import UserSerializer, VehicleSerializer, \
-    MechanicSerializer, JobsSerializer, ReviewsSerializer, CustomerSerializer
+from rest_framework.response import Response
+from rest_framework import status
 
 # Create your views here.
 
+class UserList(generics.ListCreateAPIView):
+    queryset = User.objects.all()
+    serializer_class = UserSerializer     
 
-class UserView(generics.CreateAPIView):
+    def create(self, request):
+        serializer = CreateUserSerializer(data = request.data)
+        if serializer.is_valid():
+            # Hash user's password
+            user = serializer.save()
+            # JWT_ADD: Send over JWT Token
+            return Response(UserSerializer(user).data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+class UserDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = User.objects.all()
     serializer_class = UserSerializer
+    lookup_field = 'user_id'
 
 
 class VehicleView(generics.CreateAPIView):
@@ -35,6 +48,4 @@ class JobsView(generics.CreateAPIView):
 class ReviewView(generics.CreateAPIView):
     queryset = Reviews
     serializer_class = ReviewsSerializer
-
-
 
