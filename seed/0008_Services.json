@@ -1,0 +1,42 @@
+[
+{
+    "model": "api.services",
+    "pk": 1,
+    "fields": {
+        "name": "Tire Rotation",
+        "cost": 143.23
+    }
+},
+{
+    "model": "api.services",
+    "pk": 2,
+    "fields": {
+        "name": "Oil Change",
+        "cost": 54.32
+    }
+},
+{
+    "model": "api.services",
+    "pk": 3,
+    "fields": {
+        "name": "Engine Replacement",
+        "cost": 4320.22
+    }
+},
+{
+    "model": "api.services",
+    "pk": 4,
+    "fields": {
+        "name": "Car Light Replacement",
+        "cost": 22.22
+    }
+},
+{
+    "model": "api.services",
+    "pk": 5,
+    "fields": {
+        "name": "Basic Maintenance",
+        "cost": 249.22
+    }
+}
+]
