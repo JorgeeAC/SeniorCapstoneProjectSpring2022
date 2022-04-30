@@ -19,17 +19,17 @@ const Services = () => {
         <ServicesWrapper>
         <ServicesCard>
             <ServicesIcon src = {Icon1} />
-            <ServicesH2> Reduce headaches </ServicesH2>
+            <ServicesH2> Standard Vehicle Maintenance </ServicesH2>
             <ServicesP> Help you anywhere you</ServicesP>
         </ServicesCard>
         <ServicesCard>
             <ServicesIcon src = {Icon2} />
-            <ServicesH2> Reduce headaches </ServicesH2>
+            <ServicesH2> Vehicle Registration Inspections </ServicesH2>
             <ServicesP> Help you anywhere you</ServicesP>
         </ServicesCard>
         <ServicesCard>
             <ServicesIcon src = {Icon3} />
-            <ServicesH2> Reduce headaches </ServicesH2>
+            <ServicesH2> Car Detailing Maintenance </ServicesH2>
             <ServicesP> Help you anywhere you</ServicesP>
         </ServicesCard>
         </ServicesWrapper>
