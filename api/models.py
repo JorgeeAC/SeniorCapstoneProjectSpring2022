@@ -23,17 +23,6 @@ class User(models.Model):
         return full_name
 
 
-class Customer(models.Model):
-    customer_id = models.AutoField(primary_key=True)
-    u_ID = models.ForeignKey(User, on_delete=models.CASCADE)
-    credit_info = models.CharField(max_length=16, null=False, unique=False)
-    CSV = models.CharField(max_length=6, null=False, unique=False)
-    logged_in = models.IntegerField(null= False, default=0)
-
-    def __str__(self):
-        return (f'{self.customer_id}'
-                f'{self.u_ID.__str__()}')
-
 class Mechanic(models.Model):
     mechanic_id = models.AutoField(primary_key=True)
     u_ID = models.ForeignKey(User, on_delete=models.CASCADE)
@@ -49,7 +38,7 @@ class Mechanic(models.Model):
 
 class Vehicle(models.Model):
     vehicle_id = models.AutoField(primary_key=True)
-    c_id = models.ForeignKey(Customer, on_delete=models.CASCADE)
+    c_id = models.ForeignKey(User, on_delete=models.CASCADE)
     make = models.CharField(max_length=32, null=False, default='')
     model = models.CharField(max_length=32, null=False, default='')
     year = models.IntegerField(default=2022, null=False)
@@ -59,6 +48,7 @@ class Vehicle(models.Model):
 
     def __str__(self):
         return self.vehicle_id, self.c_id.u_ID.__str__()
+
 
 class Services(models.Model):
     service_id = models.AutoField(primary_key=True)
@@ -77,9 +67,10 @@ class Mechanic_Service_Relation(models.Model):
         return (f'{self.m_id.u_ID.__str__()}' 
                 f'{self.s_id.name}')
 
+
 class Current_Jobs(models.Model):
     job_id = models.AutoField(primary_key=True)
-    c_id = models.ForeignKey(Customer, on_delete=models.CASCADE)
+    c_id = models.ForeignKey(User, on_delete=models.CASCADE)
     s_id = models.ForeignKey(Services, on_delete=models.CASCADE)
     state = models.CharField(max_length=16, choices=JOB_CHOICES)
 
@@ -90,7 +81,7 @@ class Current_Jobs(models.Model):
 
 class Reviews(models.Model):
     review_id = models.AutoField(primary_key=True)
-    c_id = models.ForeignKey(Customer, on_delete=models.CASCADE)
+    c_id = models.ForeignKey(User, on_delete=models.CASCADE)
     m_id = models.ForeignKey(Mechanic, on_delete=models.CASCADE)
     description = models.CharField(max_length=140)
     rating = models.IntegerField(choices=RATING_CHOICES)

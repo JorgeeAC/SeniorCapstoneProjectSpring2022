@@ -6,6 +6,7 @@ from rest_framework import status
 
 # Create your views here.
 
+
 class UserList(generics.ListCreateAPIView):
     queryset = User.objects.all()
     serializer_class = UserSerializer     
@@ -19,6 +20,7 @@ class UserList(generics.ListCreateAPIView):
             return Response(UserSerializer(user).data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
+
 class UserDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = User.objects.all()
     serializer_class = UserSerializer
@@ -28,11 +30,6 @@ class UserDetail(generics.RetrieveUpdateDestroyAPIView):
 class VehicleView(generics.CreateAPIView):
     queryset = Vehicle.objects.all()
     serializer_class = VehicleSerializer
-
-
-class CustomerView(generics.CreateAPIView):
-    queryset = Customer.objects.all()
-    serializer_class = CustomerSerializer
 
 
 class MechanicView(generics.CreateAPIView):

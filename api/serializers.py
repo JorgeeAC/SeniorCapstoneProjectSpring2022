@@ -1,6 +1,6 @@
 from xml.dom.minidom import ReadOnlySequentialNamedNodeMap
 from rest_framework import serializers
-from .models import User, Customer, Current_Jobs, Reviews, Mechanic, Vehicle
+from .models import User, Current_Jobs, Reviews, Mechanic, Vehicle
 
 
 class CreateUserSerializer(serializers.ModelSerializer):
@@ -17,12 +17,6 @@ class UserSerializer(serializers.ModelSerializer):
                   'email', 'phone_number', 'created_at', 'username')
 
 
-class CustomerSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Customer
-        fields = ('customer_id', 'u_id', 'credit_info', 'CSV')
-
-
 class MechanicSerializer(serializers.ModelSerializer):
     class Meta:
         model = Mechanic
@@ -32,6 +26,7 @@ class MechanicSerializer(serializers.ModelSerializer):
 class VehicleSerializer(serializers.ModelSerializer):
     class Meta:
         model = Vehicle
+
     fields = ('vehicle_id', 'c_id', 'make', 'model', 'year',
               'last_oil_change', 'last_state_inspection', 'registration_number')
 
@@ -46,3 +41,11 @@ class ReviewsSerializer(serializers.ModelSerializer):
     class Meta:
         model = Reviews
         fields = ('review_id', 'c_id', 'm_id', 'description', 'rating')
+
+
+class UserVehicleSerializer(serializers.ModelSerializer):
+    cars = VehicleSerializer(many=True, read_only=True)
+
+    class Meta:
+        model = User
+        fields = '__all__'
