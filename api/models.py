@@ -6,7 +6,7 @@ RATING_CHOICES = (('1', 1), ('2', 2), ('3', 3), ('4', 4), ('5', 5))
 
 
 class User(models.Model):
-    user_id = models.AutoField(primary_key=True)
+    id = models.AutoField(primary_key=True)
     fname = models.CharField(max_length=16, default='', unique=False)
     lname = models.CharField(max_length=32, default='', unique=False)
     address = models.CharField(max_length=64, default='', unique=False)

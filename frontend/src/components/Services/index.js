@@ -19,18 +19,18 @@ const Services = () => {
         <ServicesWrapper>
         <ServicesCard>
             <ServicesIcon src = {Icon1} />
-            <ServicesH2> Reduce headaches </ServicesH2>
-            <ServicesP> Help you anywhere you</ServicesP>
+            <ServicesH2> Standard Vehicle Maintenance </ServicesH2>
+            <ServicesP> Some car needs are perfectly fine at home. From standard oil changes, refilling fluids and changing flat tires.   </ServicesP>
         </ServicesCard>
         <ServicesCard>
             <ServicesIcon src = {Icon2} />
-            <ServicesH2> Reduce headaches </ServicesH2>
-            <ServicesP> Help you anywhere you</ServicesP>
+            <ServicesH2> Vehicle Registration Inspections </ServicesH2>
+            <ServicesP>Vehicle registrations no longer need to be a hassle.  </ServicesP>
         </ServicesCard>
         <ServicesCard>
             <ServicesIcon src = {Icon3} />
-            <ServicesH2> Reduce headaches </ServicesH2>
-            <ServicesP> Help you anywhere you</ServicesP>
+            <ServicesH2> Car Detailing Maintenance </ServicesH2>
+            <ServicesP> Get your car looking your best from the comfort of your home. Get connected with great car detailers! </ServicesP>
         </ServicesCard>
         </ServicesWrapper>
     </ServicesContainer>

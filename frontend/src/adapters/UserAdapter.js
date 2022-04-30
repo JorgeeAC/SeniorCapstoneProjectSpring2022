@@ -2,17 +2,6 @@
 const backendUrl = "http://127.0.0.1:8000/api";
 const usersRoute = backendUrl + '/users';
 
-/**
- * JWT_ADD: In all requests you want secure. Send the JSON token in the header.
- * Example:
-*   headers: {
-*       'Content-Type': 'application/json',
-*       'Authorization': localStorage.getItem('authkey')
-*    }
-* 
- */
-
-
 export default class UserAdapter {
 
     static createUser(userCredentials){
@@ -30,4 +19,22 @@ export default class UserAdapter {
         });
     }
 
+
+    static logIn(credentials){
+        return fetch(usersRoute+`/login`, {
+            method: 'POST',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify(credentials)
+        });
+    }
+
+    static getLoggedInUser(){
+        return fetch(usersRoute+`/logged-in`, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer ' + localStorage.getItem("access_key")
+            }
+        });
+    }
 }

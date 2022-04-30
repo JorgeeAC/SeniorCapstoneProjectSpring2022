@@ -9,11 +9,7 @@ export const Container = styled.div`
     right: 0;
     z-index: 0;
     overflow: hidden;
-    background: linear-gradient(
-        108deg,
-        rgba(1,147,86,1) 0%,
-        rgba(10,201,122,1) 100%
-    );
+    background-color: #101522;
 `
 
 
@@ -107,5 +103,12 @@ export const Text = styled.span`
     text-align: center;
     margin-top: 24px;
     color: #fff;
+    font-size: 14px;
+`
+
+export const ErrorText = styled.span`
+    text-align: center;
+    margin-top: 24px;
+    color: 'red';
     font-size: 14px;
 `
