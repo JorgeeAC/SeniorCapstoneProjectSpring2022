@@ -22,7 +22,7 @@ const CustForm = () => {
     <>
       <div className="form-container">
         <span className="menu-btn">
-          <a href="https://www.w3schools.com/default.asp">Main Menu</a>
+          <a href="/">Main Menu</a>
         </span>
         <CreateFormSignup />
       </div>
