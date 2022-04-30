@@ -36,7 +36,6 @@ const useCreateForm = (callback, validate) => {
     const localErrors = validate(values);
     setErrors(localErrors);
 
-// TODO: Test if username already exists!
     if (Object.keys(localErrors).length === 0){
       UserAdapter.createUser(UserSerializer.serializeUser(values))
         .then(response => response.json())
