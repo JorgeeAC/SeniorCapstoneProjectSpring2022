@@ -1,6 +1,6 @@
 from xml.dom.minidom import ReadOnlySequentialNamedNodeMap
 from rest_framework import serializers
-from .models import User, Customer, Current_Jobs, Reviews, Mechanic, Vehicle
+from .models import User, Customer, Current_Jobs, Reviews, Mechanic, Vehicle, Services
 
 
 class CreateUserSerializer(serializers.ModelSerializer):
@@ -15,6 +15,11 @@ class UserSerializer(serializers.ModelSerializer):
         model = User
         fields = ('id', 'username', 'fname', 'lname', 'address', 'user_type', 'DOB',
                   'email', 'phone_number', 'created_at', 'username')
+
+class ServiceSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Services
+        fields = ('service_id', 'name', 'cost')
 
 
 class CustomerSerializer(serializers.ModelSerializer):

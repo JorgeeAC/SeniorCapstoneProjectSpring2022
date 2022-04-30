@@ -50,7 +50,9 @@ class UserList(generics.ListCreateAPIView):
             return Response(jwt_token, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-
+class ServiceList(generics.ListAPIView):
+    queryset = Services.objects.all()
+    serializer_class = ServiceSerializer
 
 class UserDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = User.objects.all()
