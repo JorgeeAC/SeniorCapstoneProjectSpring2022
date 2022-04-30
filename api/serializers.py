@@ -48,4 +48,5 @@ class UserVehicleSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = User
-        fields = '__all__'
+        fields = ['id', 'username', 'fname', 'lname', 'address', 'user_type', 'DOB',
+                  'email', 'phone_number', 'created_at', 'username', 'password', 'cars']
