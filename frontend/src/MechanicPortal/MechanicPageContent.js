@@ -29,7 +29,7 @@ const MechanicPageContent = () => {
       <PageContainer>
         <Welcoming>
           <h1>Welcome</h1>
-          <h2>Mechanic Name</h2>
+          <h2>Mechanic</h2>
         </Welcoming>
         <ServicesContainer>
           <ServicesWrapper>
