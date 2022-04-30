@@ -3,7 +3,8 @@ import UserAdapter from '../adapters/UserAdapter';
 import CustomerDisplay from '../components/CustomerDisplay';
 import CustomerNavbar from '../components/CustomerNavbar';
 import CustomerServices from '../components/CustomerServices';
-
+import { homeObjOne } from '../components/CustomerDisplay/Data';
+import Footer from '../components/Footer'
 
 
 const CustomerPortal = () => {
@@ -19,7 +20,7 @@ const CustomerPortal = () => {
   return (
     <div>
         <CustomerNavbar />
-        <CustomerDisplay />
+        <CustomerDisplay {...homeObjOne}/>
         <CustomerServices />
         <h1> { 'Hello ! ' + user.fname+ ' ' + user.lname } </h1>
         <h2> { user.username } </h2>
@@ -27,6 +28,8 @@ const CustomerPortal = () => {
         <h4> { user.DOB } </h4>
         <h5> { user.email } </h5>
         <h6> { user.phone_number } </h6>
+
+        <Footer />
 
     </div>
   )

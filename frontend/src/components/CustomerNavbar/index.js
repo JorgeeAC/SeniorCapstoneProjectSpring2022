@@ -51,15 +51,6 @@ const CustomerNavbar = ({toggle}) => {
                         offset = {-80}
                         > Services </NavLinks>
                     </NavItem>
-                    <NavItem>
-                        <NavLinks to= 'reviews'
-                        smooth = {true}
-                        duration = {500} 
-                        spy = {true} 
-                        exact = 'true' 
-                        offset = {-80}
-                        > Reviews </NavLinks>
-                    </NavItem>
                 </NavMenu>
             </NavbarContainer>
         </CustomerNav>
