@@ -37,13 +37,13 @@ REST_FRAMEWORK = {
         'rest_framework.permissions.AllowAny'
     ),
     'DEFAULT_AUTHENTICATION_CLASSES': (
-        'rest_framework_simplejwt.authentication.JWTAuthentication',
+        'wrench_project.jwt_stuff.authentication.JWTAuthentication',
     )
 }
 
 
 SIMPLE_JWT = {
-    'ACCESS_TOKEN_LIFETIME': timedelta(minutes=30),
+    'ACCESS_TOKEN_LIFETIME': timedelta(minutes=2000),
     'REFRESH_TOKEN_LIFETIME': timedelta(days=1),
     'ROTATE_REFRESH_TOKENS': False,
     'BLACKLIST_AFTER_ROTATION': False,
@@ -61,11 +61,11 @@ SIMPLE_JWT = {
     'AUTH_HEADER_NAME': 'HTTP_AUTHORIZATION',
     'USER_ID_FIELD': 'id',
     'USER_ID_CLAIM': 'user_id',
-    'USER_AUTHENTICATION_RULE': 'rest_framework_simplejwt.authentication.default_user_authentication_rule',
+    'USER_AUTHENTICATION_RULE': 'wrench_project.jwt_stuff.authentication.default_user_authentication_rule',
 
-    'AUTH_TOKEN_CLASSES': ('rest_framework_simplejwt.tokens.AccessToken',),
+    'AUTH_TOKEN_CLASSES': ('wrench_project.jwt_stuff.tokens.AccessToken',),
     'TOKEN_TYPE_CLAIM': 'token_type',
-    'TOKEN_USER_CLASS': 'rest_framework_simplejwt.models.TokenUser',
+    'TOKEN_USER_CLASS': 'wrench_project.jwt_stuff.models.TokenUser',
 
     'JTI_CLAIM': 'jti',
 

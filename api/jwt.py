@@ -1,4 +1,4 @@
-from rest_framework_simplejwt.tokens import RefreshToken
+from wrench_project.jwt_stuff.tokens import RefreshToken
 
 
 def get_tokens_for_user(user):

@@ -4,7 +4,7 @@ from .serializers import *
 from rest_framework import generics
 from rest_framework.response import Response
 from rest_framework import status
-from rest_framework_simplejwt.authentication import JWTAuthentication
+from wrench_project.jwt_stuff.authentication import JWTAuthentication
 from rest_framework.views import APIView
 
 class LoginView(APIView):
