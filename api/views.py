@@ -7,10 +7,11 @@ from rest_framework import status
 from wrench_project.jwt_stuff.authentication import JWTAuthentication
 from rest_framework.views import APIView
 
-class LoginView(APIView):
-    permission_classes=[]
 
-    #fetch logged in user
+class LoginView(APIView):
+    permission_classes = []
+
+    # fetch logged in user
     def get(self, request):
 
         header = JWTAuthentication.get_header(JWTAuthentication, request)
@@ -22,7 +23,7 @@ class LoginView(APIView):
             return Response(UserSerializer(user).data, status=status.HTTP_200_OK)
         return Response(status=status.HTTP_404_NOT_FOUND)
 
-    #login
+    # login
     def post(self, request):
         email = request.data.get("email")
         password = request.data.get("password")
@@ -35,14 +36,13 @@ class LoginView(APIView):
         return Response(data, status=status.HTTP_200_OK)
 
 
-
 class UserList(generics.ListCreateAPIView):
     queryset = User.objects.all()
-    serializer_class = UserSerializer     
-    permission_classes=[]
+    serializer_class = UserSerializer
+    permission_classes = []
 
     def create(self, request):
-        serializer = CreateUserSerializer(data = request.data)
+        serializer = CreateUserSerializer(data=request.data)
         if serializer.is_valid():
             # Hash user's password
             user = serializer.save()
@@ -52,12 +52,11 @@ class UserList(generics.ListCreateAPIView):
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
-
 class UserDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = User.objects.all()
     serializer_class = UserSerializer
     lookup_field = 'id'
-    permission_classes=[]
+    permission_classes = []
 
 
 class VehicleView(generics.CreateAPIView):
@@ -78,4 +77,3 @@ class JobsView(generics.CreateAPIView):
 class ReviewView(generics.CreateAPIView):
     queryset = Reviews
     serializer_class = ReviewsSerializer
-
