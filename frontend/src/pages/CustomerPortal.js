@@ -3,15 +3,14 @@ import UserAdapter from '../adapters/UserAdapter';
 
 
 const CustomerPortal = () => {
-  const id = localStorage.getItem('user_id');
   const [ user, setUser ] = useState({});
 
   useEffect(() => {
-    UserAdapter.getUser(id)
+    UserAdapter.getLoggedInUser()
     .then(resp => resp.json())
-    .then(resp => {  console.log(resp);setUser(resp) })
+    .then(resp => {  console.log(resp); setUser(resp) })
     .catch(console.log)
-  }, [id])
+  }, [])
 
   return (
     <div>

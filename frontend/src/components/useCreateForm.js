@@ -2,6 +2,7 @@ import { useState } from "react";
 import UserAdapter from "../adapters/UserAdapter";
 import UserSerializer from "../serializers/User";
 import { useNavigate } from "react-router-dom";
+import JWTHandler from "../shared/JwtHandler";
 
 const useCreateForm = (callback, validate) => {
 
@@ -35,16 +36,17 @@ const useCreateForm = (callback, validate) => {
     const localErrors = validate(values);
     setErrors(localErrors);
 
+// TODO: Test if username already exists!
     if (Object.keys(localErrors).length === 0){
       UserAdapter.createUser(UserSerializer.serializeUser(values))
         .then(response => response.json())
         .then(response => {
-            // JWT_ADD: Should get JWT Token back instead of user_id. 
-            // Set the JWT token into the localstorage in place of user_id.
-
-            localStorage.setItem('user_id', response.user_id);
+            JWTHandler.storeJwtToken(response);
             navigate(`/profile`);
-        }).catch(console.log)
+        }).catch(error => {
+          setErrors(...errors, error);
+          console.log(error);
+        })
       }
   };
 

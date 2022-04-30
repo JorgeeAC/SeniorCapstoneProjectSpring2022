@@ -105,3 +105,10 @@ export const Text = styled.span`
     color: #fff;
     font-size: 14px;
 `
+
+export const ErrorText = styled.span`
+    text-align: center;
+    margin-top: 24px;
+    color: 'red';
+    font-size: 14px;
+`
