@@ -6,10 +6,11 @@ from rest_framework.response import Response
 from rest_framework import status
 from wrench_project.jwt_stuff.authentication import JWTAuthentication
 from rest_framework.views import APIView
+from rest_framework import permissions
 
 
 class LoginView(APIView):
-    permission_classes = []
+    permission_classes = [permissions.AllowAny]
 
     # fetch logged in user
     def get(self, request):
@@ -39,7 +40,7 @@ class LoginView(APIView):
 class UserList(generics.ListCreateAPIView):
     queryset = User.objects.all()
     serializer_class = UserSerializer
-    permission_classes = []
+    permission_classes = [permissions.AllowAny]
 
     def create(self, request):
         serializer = CreateUserSerializer(data=request.data)
