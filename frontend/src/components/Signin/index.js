@@ -1,4 +1,5 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
+
 import { 
     Container, 
     Form, 
@@ -9,11 +10,11 @@ import {
     FormLabel,
     FormInput,
     FormButton,
+    ErrorText,
     Text
  } from './SigninElements'
 
-const SignIn
- = () => {
+const SignIn = ({ handleSubmit, errorMessage, onChange }) => {
   return (
     <>
         <Container>
@@ -22,11 +23,13 @@ const SignIn
                 <FormContent>
                     <Form action = "#">
                         <FormH1> Sign into your account </FormH1>
+                        { errorMessage && 
+                            <ErrorText style={{color: 'red'}}> { errorMessage } </ErrorText> }
                         <FormLabel htmlFor='for'>Email</FormLabel>
-                        <FormInput type ='email' required />
+                        <FormInput onChange={onChange} type ='email' required />
                         <FormLabel htmlFor='for'>Password</FormLabel>
-                        <FormInput type = 'password' required />
-                        <FormButton type = 'submit'>Continue</FormButton>
+                        <FormInput onChange={onChange} type = 'password' required />
+                        <FormButton onClick={handleSubmit} type = 'submit'>Continue</FormButton>
                         <Text>Forgot Password</Text>
                     </Form>
                 </FormContent>

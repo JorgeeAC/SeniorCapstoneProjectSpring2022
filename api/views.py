@@ -24,11 +24,10 @@ class LoginView(APIView):
 
     #login
     def post(self, request):
-        username = request.data.get("username")
+        email = request.data.get("email")
         password = request.data.get("password")
-
         try:
-            user = User.objects.get(username=username, password=password)
+            user = User.objects.get(email=email, password=password)
         except:
             return Response(status=status.HTTP_404_NOT_FOUND)
 
