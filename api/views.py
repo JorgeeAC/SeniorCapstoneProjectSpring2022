@@ -51,6 +51,7 @@ class UserList(generics.ListCreateAPIView):
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 class ServiceList(generics.ListAPIView):
+    permission_classes=[]
     queryset = Services.objects.all()
     serializer_class = ServiceSerializer
 
@@ -59,7 +60,6 @@ class UserDetail(generics.RetrieveUpdateDestroyAPIView):
     serializer_class = UserSerializer
     lookup_field = 'id'
     permission_classes=[]
-
 
 class VehicleView(generics.CreateAPIView):
     queryset = Vehicle.objects.all()

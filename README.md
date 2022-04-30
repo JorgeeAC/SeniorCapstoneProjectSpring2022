@@ -15,3 +15,6 @@ Assuming Python, Django, and npm are installed. Make sure you're inside of the p
 - Make sure to run ```python3 ./manage.py makemigrations``` to make migrations to any database or model changes made.
 - Then run ```python3 ./manage.py migrate``` to migrate the changes.
 
+# Seed database
+
+- ```python manage.py loaddata seed/0008_Services.json``` Seeds database

@@ -64,6 +64,7 @@ class Services(models.Model):
     service_id = models.AutoField(primary_key=True)
     name = models.CharField(max_length=32, null=False, unique=True)
     cost = models.FloatField(null=False, default=24.99)
+    description = models.CharField(max_length=140)
 
     def __str__(self):
         return self.name

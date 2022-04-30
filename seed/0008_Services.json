@@ -4,7 +4,8 @@
     "pk": 1,
     "fields": {
         "name": "Tire Rotation",
-        "cost": 143.23
+        "cost": 143.23,
+        "description": "Rotation of tires"
     }
 },
 {
@@ -12,7 +13,8 @@
     "pk": 2,
     "fields": {
         "name": "Oil Change",
-        "cost": 54.32
+        "cost": 54.32,
+        "description": "This is an Oil Change"
     }
 },
 {
@@ -20,7 +22,8 @@
     "pk": 3,
     "fields": {
         "name": "Engine Replacement",
-        "cost": 4320.22
+        "cost": 4320.22,
+        "description": "Replace the whole engine? You a bold muthafucka"
     }
 },
 {
@@ -28,7 +31,8 @@
     "pk": 4,
     "fields": {
         "name": "Car Light Replacement",
-        "cost": 22.22
+        "cost": 22.22,
+        "description": "Tail lights broke? We gotcha"
     }
 },
 {
@@ -36,7 +40,8 @@
     "pk": 5,
     "fields": {
         "name": "Basic Maintenance",
-        "cost": 249.22
+        "cost": 249.22,
+        "description": "I just wanna say.. I'm really that nigga tho.."
     }
 }
 ]
