@@ -5,18 +5,16 @@ import {BrowserRouter as Router, Routes, Route} from 'react-router-dom';
 import Home from './pages'
 import SigninPage from './pages/signin';
 import CreateForm from './components/CreateForm';
-import CustomerPortal from './pages/CustomerPortal';
+import ProfilePage from './pages/ProfilePage';
 
 function App () {
     return (
         <Router>
           <Routes>
-
-            <Route  path = "/" element = {<Home/>} exact />
-            <Route  path = "/signin" element = {<SigninPage/>} exact />
+            <Route exact path= "/" element= {<Home/>} />
+            <Route exact path= "/signin" element= {<SigninPage/>} />
             <Route exact path='/signup' element={<CreateForm />} />
-            <Route exact path='/profile' element={<CustomerPortal />} />
-
+            <Route exact path='/profile' element={<ProfilePage />} />
           </Routes>
         </Router>
     )

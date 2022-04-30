@@ -6,14 +6,14 @@ from .models import User, Customer, Current_Jobs, Reviews, Mechanic, Vehicle
 class CreateUserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = ('user_id', 'username', 'fname', 'lname', 'address', 'user_type', 'DOB',
+        fields = ('id', 'username', 'fname', 'lname', 'address', 'user_type', 'DOB',
                   'email', 'phone_number', 'created_at', 'username', 'password')
 
 
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = ('user_id', 'username', 'fname', 'lname', 'address', 'user_type', 'DOB',
+        fields = ('id', 'username', 'fname', 'lname', 'address', 'user_type', 'DOB',
                   'email', 'phone_number', 'created_at', 'username')
 
 
