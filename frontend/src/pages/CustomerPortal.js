@@ -19,24 +19,17 @@ const CustomerPortal = () => {
 
   return (
     <div>
-        { user &&
-          <>
-            <CustomerNavbar />
-            <CustomerDisplay />
-            <CustomerDisplay {...homeObjOne}/>
-          </>
-        }
+        <CustomerNavbar />
+        <CustomerDisplay />
         <Services />
-        {user && 
-          <>
-            <h1> { 'Hello ! ' + user.fname+ ' ' + user.lname } </h1>
-            <h2> { user.username } </h2>
-            <h3> { user.address } </h3>
-            <h4> { user.DOB } </h4>
-            <h5> { user.email } </h5>
-            <h6> { user.phone_number } </h6>
-          </>
-        }
+        <CustomerDisplay {...homeObjOne}/>
+        <h1> { 'Hello ! ' + user.fname+ ' ' + user.lname } </h1>
+        <h2> { user.username } </h2>
+        <h3> { user.address } </h3>
+        <h4> { user.DOB } </h4>
+        <h5> { user.email } </h5>
+        <h6> { user.phone_number } </h6>
+
         <Footer />
 
     </div>
