@@ -21,9 +21,10 @@ class ServiceSerializer(serializers.ModelSerializer):
 
 
 class MechanicSerializer(serializers.ModelSerializer):
+    user = UserSerializer(read_only=True, source='u_ID')
     class Meta:
         model = Mechanic
-        fields = ('mechanic_id', 'u_ID', 'ASE_certified', 'available')
+        fields = ('mechanic_id', 'user', 'ASE_certified', 'available')
 
 
 class VehicleSerializer(serializers.ModelSerializer):
@@ -47,7 +48,7 @@ class JobRequestSerializer(serializers.ModelSerializer):
     
     class Meta:
         model=JobRequests
-        fields=('id', 'user', 'service')
+        fields=('id', 'user', 'service', 'created_at')
 
 class JobRequestCreateSerializer(serializers.ModelSerializer):
     class Meta:

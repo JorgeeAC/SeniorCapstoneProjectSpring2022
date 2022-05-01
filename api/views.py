@@ -1,3 +1,4 @@
+from cgitb import lookup
 from http.client import BAD_REQUEST
 from api.jwt import get_tokens_for_user
 from .models import *
@@ -8,15 +9,21 @@ from rest_framework import status
 from wrench_project.jwt_stuff.authentication import JWTAuthentication
 from rest_framework.views import APIView
 
+
+def get_current_user(request):
+    header = JWTAuthentication.get_header(JWTAuthentication, request)
+    raw_token = JWTAuthentication.get_raw_token(JWTAuthentication, header)
+    validated_token = JWTAuthentication.get_validated_token(JWTAuthentication, raw_token)
+
+    return User.objects.get(id=validated_token["user_id"])
+
+
 class LoginView(APIView):
     permission_classes = []
 
     # fetch logged in user
     def get(self, request):
-        header = JWTAuthentication.get_header(JWTAuthentication, request)
-        raw_token = JWTAuthentication.get_raw_token(JWTAuthentication, header)
-        validated_token = JWTAuthentication.get_validated_token(JWTAuthentication, raw_token)
-        user = User.objects.get(id=validated_token["user_id"])
+        user = get_current_user(request)
 
         if user is not None:
             return Response(UserSerializer(user).data, status=status.HTTP_200_OK)
@@ -33,6 +40,26 @@ class LoginView(APIView):
 
         data = get_tokens_for_user(user)
         return Response(data, status=status.HTTP_200_OK)
+
+
+class CurrentJobView(APIView):
+    permission_classes = []
+    # fetch current job for loggedin User
+    def get(self, request):
+        user = get_current_user(request)
+
+        if user is not None:
+            job = Jobs.objects.filter(request_id__user_id=user.id)
+            if job.count() > 0:
+                job = job[0]
+                return Response(JobsSerializer(job).data, status=status.HTTP_200_OK)
+            else:
+                job = JobRequests.objects.order_by('created_at').filter(user_id=user.id)
+                if job.count() > 0:
+                    job = job[0]
+                    return Response(JobRequestSerializer(job).data, status=status.HTTP_200_OK)
+ 
+        return Response(status=status.HTTP_404_NOT_FOUND)
 
 
 class UserList(generics.ListCreateAPIView):
@@ -95,6 +122,19 @@ class MechanicView(generics.ListAPIView):
     permission_classes=[]
     queryset = Mechanic.objects.all()
     serializer_class = MechanicSerializer
+
+class MechanicDetail(generics.RetrieveAPIView):
+    permission_classes=[]
+
+    def get(self, request, id):
+        serializer=MechanicSerializer
+        
+        mechanic = Mechanic.objects.get(u_ID=id)
+        if mechanic is not None:
+            return (Response(MechanicSerializer(mechanic).data, status=status.HTTP_200_OK))
+        return Response(serializer.errors, status=status.HTTP_404_NOT_FOUND)
+
+
 
 class ReviewView(generics.CreateAPIView):
     permission_classes=[]

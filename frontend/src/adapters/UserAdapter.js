@@ -37,4 +37,13 @@ export default class UserAdapter {
             }
         });
     }
+
+    static getMechanicFromUserId(id){
+        return fetch(backendUrl+'/mechanics/'+id, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        })
+    }
 }

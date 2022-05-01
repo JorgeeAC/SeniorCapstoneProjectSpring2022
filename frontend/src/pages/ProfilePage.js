@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import UserAdapter from '../adapters/UserAdapter'; 
 import CustomerPortal from './CustomerPortal';
+import MechanicPortal from './MechanicPortal/MechanicPageContent';
 
 const ProfilePage = () => {
     const [ user, setUser ] = useState({});
@@ -18,8 +19,8 @@ const ProfilePage = () => {
     }, [])
 
     return (
-        <>                                                { /**MechanicPortal**/ }
-            { user ? user.user_type === 'C' ? <CustomerPortal /> : null : null }
+        <>                                                
+            { user && user.user_type === 'C' ? <CustomerPortal /> : <MechanicPortal  user={user}/> }
         </>
     )
 }

@@ -16,6 +16,8 @@ import {
     ModalTitle,
     Button
   } from './ModalElements'
+import ServicesAdapter from '../../adapters/ServicesAdapter';
+import { useNavigate } from 'react-router-dom';
 
 const ServiceCard = ({ service, icon, user }) => {
 
@@ -37,6 +39,19 @@ export default ServiceCard;
 
 
 const ServiceModal = ({ service, active, hideModal, user }) => {
+    const navigate = useNavigate();
+
+    const handleClick = () => {
+        ServicesAdapter.createJobRequest({ service_id: service.service_id, user_id: user.id })
+        .then(() => { 
+            
+            hideModal();
+            navigate('/profile')
+        
+        })
+        .catch(console.log)
+    }
+
     return (
         <>
         {active && (
@@ -52,7 +67,7 @@ const ServiceModal = ({ service, active, hideModal, user }) => {
                     { service.description }
                 </ModalBody>
                 <ModalFooter> 
-                    { user && <Button> Choose Service </Button>}
+                    { user && <Button onClick={handleClick}> Choose Service </Button>}
                 </ModalFooter>
             </ModalContainer>
         </ModalBlock>
