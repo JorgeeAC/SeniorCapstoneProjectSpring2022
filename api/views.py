@@ -1,3 +1,4 @@
+from http.client import BAD_REQUEST
 from api.jwt import get_tokens_for_user
 from .models import *
 from .serializers import *
@@ -6,15 +7,12 @@ from rest_framework.response import Response
 from rest_framework import status
 from wrench_project.jwt_stuff.authentication import JWTAuthentication
 from rest_framework.views import APIView
-from rest_framework import permissions
-
 
 class LoginView(APIView):
-    permission_classes = [permissions.AllowAny]
+    permission_classes = []
 
     # fetch logged in user
     def get(self, request):
-
         header = JWTAuthentication.get_header(JWTAuthentication, request)
         raw_token = JWTAuthentication.get_raw_token(JWTAuthentication, header)
         validated_token = JWTAuthentication.get_validated_token(JWTAuthentication, raw_token)
@@ -39,16 +37,18 @@ class LoginView(APIView):
 
 class UserList(generics.ListCreateAPIView):
     queryset = User.objects.all()
-    serializer_class = UserSerializer
-    permission_classes = [permissions.AllowAny]
+    serializer_class = UserCompleteSerializer
+    permission_classes = []
 
     def create(self, request):
         serializer = CreateUserSerializer(data=request.data)
         if serializer.is_valid():
-            # Hash user's password
             user = serializer.save()
-            jwt_token = get_tokens_for_user(user)
 
+            if(user.user_type == 'M'):
+                Mechanic(u_ID=user).save()
+
+            jwt_token = get_tokens_for_user(user)
             return Response(jwt_token, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
@@ -59,25 +59,44 @@ class ServiceList(generics.ListAPIView):
 
 class UserDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = User.objects.all()
-    serializer_class = UserSerializer
+    serializer_class = UserCompleteSerializer
     lookup_field = 'id'
     permission_classes = []
+
+class JobRequestsList(generics.ListCreateAPIView):
+    permission_classes=[]
+    queryset = JobRequests.objects.all()
+    serializer_class = JobRequestSerializer
+
+    def create(self, request):
+        serializer=JobRequestCreateSerializer(data=request.data)
+        if serializer.is_valid():
+            job_request=serializer.save()
+            return Response(JobRequestSerializer(job_request).data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+class JobList(generics.ListCreateAPIView):
+    permission_classes=[]
+    queryset=Jobs.objects.all()
+    serializer_class = JobsSerializer
+
+    def create(self, request):
+        serializer=JobCreateSerializer(data=request.data)
+        if serializer.is_valid():
+            job=serializer.save()
+            return Response(JobsSerializer(job).data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 class VehicleView(generics.CreateAPIView):
     queryset = Vehicle.objects.all()
     serializer_class = VehicleSerializer
 
-
-class MechanicView(generics.CreateAPIView):
+class MechanicView(generics.ListAPIView):
+    permission_classes=[]
     queryset = Mechanic.objects.all()
     serializer_class = MechanicSerializer
 
-
-class JobsView(generics.CreateAPIView):
-    queryset = Current_Jobs
-    serializer_class = JobsSerializer
-
-
 class ReviewView(generics.CreateAPIView):
+    permission_classes=[]
     queryset = Reviews
     serializer_class = ReviewsSerializer
