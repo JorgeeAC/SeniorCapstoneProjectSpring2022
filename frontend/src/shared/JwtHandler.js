@@ -4,4 +4,9 @@ export default class JWTHandler {
         localStorage.setItem('access_key', jwtToken.access);
         localStorage.setItem('refresh_key', jwtToken.refresh)
     }
+
+    static deleteJWTToken(){
+        localStorage.removeItem('access_key');
+        localStorage.removeItem('refresh_key')
+    }
 }

@@ -1,0 +1,47 @@
+[
+{
+    "model": "api.services",
+    "pk": 1,
+    "fields": {
+        "name": "Tire Rotation",
+        "cost": 143.23,
+        "description": "Rotation of tires"
+    }
+},
+{
+    "model": "api.services",
+    "pk": 2,
+    "fields": {
+        "name": "Oil Change",
+        "cost": 54.32,
+        "description": "This is an Oil Change"
+    }
+},
+{
+    "model": "api.services",
+    "pk": 3,
+    "fields": {
+        "name": "Engine Replacement",
+        "cost": 4320.22,
+        "description": "Replace the whole engine? You a bold muthafucka"
+    }
+},
+{
+    "model": "api.services",
+    "pk": 4,
+    "fields": {
+        "name": "Car Light Replacement",
+        "cost": 22.22,
+        "description": "Tail lights broke? We gotcha"
+    }
+},
+{
+    "model": "api.services",
+    "pk": 5,
+    "fields": {
+        "name": "Basic Maintenance",
+        "cost": 249.22,
+        "description": "I just wanna say.. I'm really that nigga tho.."
+    }
+}
+]

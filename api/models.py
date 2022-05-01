@@ -1,7 +1,7 @@
 from django.db import models
 
 # Create your models here.
-JOB_CHOICES = (('1', 'Open'), ('2', 'In Progress'), ('3', 'Complete'))
+JOB_CHOICES = (('1', 'In Progress'), ('2', 'Complete'))
 RATING_CHOICES = (('1', 1), ('2', 2), ('3', 3), ('4', 4), ('5', 5))
 
 
@@ -26,8 +26,7 @@ class User(models.Model):
 class Mechanic(models.Model):
     mechanic_id = models.AutoField(primary_key=True)
     u_ID = models.ForeignKey(User, on_delete=models.CASCADE)
-    rating = models.IntegerField(null=False)
-    checking_account = models.CharField(max_length=32, null=False)
+    checking_account = models.CharField(max_length=32, null=True)
     ASE_certified = models.BooleanField(default=True, null=False)
     available = models.BooleanField(default=False, null=False)
 
@@ -54,29 +53,30 @@ class Services(models.Model):
     service_id = models.AutoField(primary_key=True)
     name = models.CharField(max_length=32, null=False, unique=True)
     cost = models.FloatField(null=False, default=24.99)
+    description = models.CharField(max_length=140)
 
     def __str__(self):
         return self.name
 
-
-class Mechanic_Service_Relation(models.Model):
-    m_id = models.ForeignKey(Mechanic, on_delete=models.CASCADE)
-    s_id = models.ForeignKey(Services, on_delete=models.CASCADE)
-
-    def __str__(self):
-        return (f'{self.m_id.u_ID.__str__()}' 
-                f'{self.s_id.name}')
-
-
-class Current_Jobs(models.Model):
-    job_id = models.AutoField(primary_key=True)
-    c_id = models.ForeignKey(User, on_delete=models.CASCADE)
-    s_id = models.ForeignKey(Services, on_delete=models.CASCADE)
-    state = models.CharField(max_length=16, choices=JOB_CHOICES)
+class JobRequests(models.Model):
+    id = models.AutoField(primary_key=True)
+    user_id = models.ForeignKey(User, on_delete=models.CASCADE)
+    service_id = models.ForeignKey(Services, on_delete=models.CASCADE)
+    created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return (f'{self.job_id}' 
-                f'{self.c_id.u_ID.__str__()}')
+        return (f'{self.id}' 
+                f'{self.user_id.u_ID.__str__()}')
+
+class Jobs(models.Model):
+    id = models.AutoField(primary_key=True)
+    request_id = models.ForeignKey(JobRequests, on_delete=models.CASCADE)
+    mechanic_id = models.ForeignKey(Mechanic, on_delete=models.CASCADE)
+    state = models.CharField(max_length=16, choices=JOB_CHOICES, default='In Progress')
+
+    def __str__(self):
+        return (f'{self.id}' 
+                f'{self.request_id.u_ID.__str__()}')
 
 
 class Reviews(models.Model):
