@@ -6,7 +6,7 @@ export const homeObjOne = {
     topLine: 'Premium Car Services',
     headline: 'Car Service with a purpose',
     description:
-     'Honest car services right to your door. Large catalog of reviews to give customers the most confidence',
+     'Honest car services right to your door. From oil changes to flat tires we got you covered. ',
     buttonLabel: 'Get started',
     imgStart: false,
     img: require('../../images/svg-1.svg').default,
@@ -21,10 +21,10 @@ export const homeObjTwo = {
     lightBg: true,
     lightText: false,
     lightTextDesc: false,
-    topLine: 'Always Transparent',
-    headline: 'Catalog of Reviews',
+    topLine: 'Tired of the common practices?',
+    headline: 'We are too.',
     description:
-     'We believe in honesty and ',
+     'We believe in honesty and we will give you the service you deserve.',
     buttonLabel: 'Learn More',
     imgStart: true,
     img: require('../../images/svg-2.svg').default,
@@ -42,7 +42,7 @@ export const homeObjThree = {
     topLine: 'Get Started',
     headline: 'Sign Up Today',
     description:
-     'Honest car services right to your door. Large catalog of reviews to give customers the most confidence',
+     'Helping you get to where you need!',
     buttonLabel: 'Start Now',
     imgStart: false,
     img: require('../../images/svg-3.svg').default,

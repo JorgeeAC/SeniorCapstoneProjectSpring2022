@@ -19,11 +19,11 @@ const Footer = () => {
                         <FooterLinkTitle> About Us</FooterLinkTitle>
                             <FooterLink to = "/signin"> How it works </FooterLink>
                             <FooterLink to = "/signin"> Testimonials </FooterLink>
-                            <FooterLink to = "/signin"> Careers </FooterLink>
+                            <FooterLink to = "/signin"> Services </FooterLink>
                             <FooterLink to = "/signin"> Terms of Service </FooterLink>
                     </FooterLinkItems>
                     <FooterLinkItems>
-                        <FooterLinkTitle> About Us</FooterLinkTitle>
+                        <FooterLinkTitle> Get Connected </FooterLinkTitle>
                             <FooterLink to = "/signin"> Contact Us </FooterLink>
                             <FooterLink to = "/signin"> Testimonials </FooterLink>
                             <FooterLink to = "/signin"> Careers </FooterLink>
@@ -33,18 +33,12 @@ const Footer = () => {
                 <FooterLinksWrapper>
                     <FooterLinkItems>
                         <FooterLinkTitle> Careers</FooterLinkTitle>
-                            <FooterLink to = "/signin"> Careers </FooterLink>
+                            <FooterLink to = "/signin"> Our Values </FooterLink>
                             <FooterLink to = "/signin"> How to Apply </FooterLink>
                             <FooterLink to = "/signin"> Get Certified </FooterLink>
                             <FooterLink to = "/signin"> Code of Ethics </FooterLink>
                     </FooterLinkItems>
-                    <FooterLinkItems>
-                        <FooterLinkTitle> About Us</FooterLinkTitle>
-                            <FooterLink to = "/signin"> How it works </FooterLink>
-                            <FooterLink to = "/signin"> Testimonials </FooterLink>
-                            <FooterLink to = "/signin"> Careers </FooterLink>
-                            <FooterLink to = "/signin"> Terms of Service </FooterLink>
-                    </FooterLinkItems>
+
                 </FooterLinksWrapper>
             </FooterLinksContainer>
             

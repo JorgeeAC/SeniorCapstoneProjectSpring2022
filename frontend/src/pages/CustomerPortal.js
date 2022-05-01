@@ -3,7 +3,8 @@ import UserAdapter from '../adapters/UserAdapter';
 import CustomerDisplay from '../components/CustomerDisplay';
 import CustomerNavbar from '../components/CustomerNavbar';
 import Services from '../components/Services';
-
+import { homeObjOne } from '../components/CustomerDisplay/Data';
+import Footer from '../components/Footer'
 
 
 const CustomerPortal = () => {
@@ -18,15 +19,25 @@ const CustomerPortal = () => {
 
   return (
     <div>
-        <CustomerNavbar />
-        <CustomerDisplay />
+        { user &&
+          <>
+            <CustomerNavbar />
+            <CustomerDisplay />
+            <CustomerDisplay {...homeObjOne}/>
+          </>
+        }
         <Services />
-        <h1> { 'Hello ! ' + user.fname+ ' ' + user.lname } </h1>
-        <h2> { user.username } </h2>
-        <h3> { user.address } </h3>
-        <h4> { user.DOB } </h4>
-        <h5> { user.email } </h5>
-        <h6> { user.phone_number } </h6>
+        {user && 
+          <>
+            <h1> { 'Hello ! ' + user.fname+ ' ' + user.lname } </h1>
+            <h2> { user.username } </h2>
+            <h3> { user.address } </h3>
+            <h4> { user.DOB } </h4>
+            <h5> { user.email } </h5>
+            <h6> { user.phone_number } </h6>
+          </>
+        }
+        <Footer />
 
     </div>
   )

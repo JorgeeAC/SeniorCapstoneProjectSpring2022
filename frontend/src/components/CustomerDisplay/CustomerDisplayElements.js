@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 export const CustomerInfoContainer = styled.div`
     color: #fff;
-    background: #2d6986;
+    background: #000;
 
     @media screen and (max-width: 768px){
         padding: 100px 0;
