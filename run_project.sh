@@ -6,14 +6,14 @@ startup='false'
 help() {
     echo "options:"
     echo "-h,         show available options"
-    echo "-s,         run in start-up mode"  
+    echo "-i,         run in start-up mode"  
     echo "-p,         specify your python variable, ex: (python3, python)"
 }
 
-while getopts 'p:sh' flag; do
+while getopts 'p:ih' flag; do
     case "${flag}" in
         p) python_variable="${OPTARG}" ;;
-        s) startup='true' ;;
+        i) startup='true' ;;
         h) help 
             exit 1 ;;
     esac
