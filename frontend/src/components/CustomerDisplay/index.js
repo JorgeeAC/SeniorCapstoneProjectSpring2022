@@ -14,9 +14,7 @@ import {
     ImgWrap} from './CustomerDisplayElements'
 
 const CustomerDisplay = ({lightBg, id, imgStart, topLine, lightText, headline, 
-    darkText, description, buttonLabel, img, alt, primary, dark, dark2}) => {
-    const [ user, setUser ] = useState({});
-
+    darkText, description, img, alt}) => {
     
   return (
     <>

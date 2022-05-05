@@ -6,7 +6,7 @@ import {
 } from './ServicesElements'
 
 const CustomerJobDisplay = ({ job }) => {
-    const service = job.state ? job.request.service : job.service
+    const service = job.request ? job.request.service : job.service
 
 
     return(
@@ -16,7 +16,7 @@ const CustomerJobDisplay = ({ job }) => {
                 <h1> { service.name } </h1>
                 <h3> { service.description } </h3>
                 <h3> { service.cost } </h3>
-                { job.state ?
+                { job.request ?
                     <>
                         <h1> Status: { job.state } </h1>
                         <h1> Assigned Mechanic </h1>

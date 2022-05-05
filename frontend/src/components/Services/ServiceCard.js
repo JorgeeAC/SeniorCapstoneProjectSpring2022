@@ -19,13 +19,13 @@ import {
 import ServicesAdapter from '../../adapters/ServicesAdapter';
 import { useNavigate } from 'react-router-dom';
 
-const ServiceCard = ({ service, icon, user }) => {
+const ServiceCard = ({ service, icon, user, render }) => {
 
     const [active, setActive] = useState(false);
 
     return(
         <>
-           <ServiceModal active={active} service={service} user={user} hideModal={() => setActive(false)} />
+           <ServiceModal active={active} service={service} user={user} render={render} hideModal={() => setActive(false)} />
             <ServicesCard onClick={() => setActive(true)}>
                 <ServicesIcon src = {icon} />
                 <ServicesH2> { service.name } </ServicesH2>
@@ -38,16 +38,16 @@ const ServiceCard = ({ service, icon, user }) => {
 export default ServiceCard;
 
 
-const ServiceModal = ({ service, active, hideModal, user }) => {
+const ServiceModal = ({ service, active, hideModal, user, render }) => {
     const navigate = useNavigate();
 
     const handleClick = () => {
         ServicesAdapter.createJobRequest({ service_id: service.service_id, user_id: user.id })
         .then(() => { 
             
+            render(true);
             hideModal();
-            navigate('/profile')
-        
+
         })
         .catch(console.log)
     }

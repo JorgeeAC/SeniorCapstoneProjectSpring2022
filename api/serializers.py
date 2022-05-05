@@ -48,7 +48,7 @@ class JobRequestSerializer(serializers.ModelSerializer):
     
     class Meta:
         model=JobRequests
-        fields=('id', 'user', 'service', 'created_at')
+        fields=('id', 'user', 'service', 'created_at', 'state')
 
 class JobRequestCreateSerializer(serializers.ModelSerializer):
     class Meta:

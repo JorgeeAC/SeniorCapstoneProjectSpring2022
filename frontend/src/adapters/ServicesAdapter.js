@@ -12,7 +12,7 @@ export default class ServicesAdapter {
     }
 
     static getCurrentJob() {
-        return fetch(jobsRoute+'/current-job', {
+        return fetch(jobsRoute+'/customers/current-job', {
             method: 'GET',
             headers: { 
                 'Content-Type': 'application/json',
@@ -22,7 +22,7 @@ export default class ServicesAdapter {
     }
 
     static getJobRequests() {
-        return fetch(backendUrl+'/jobs-requests', {
+        return fetch(backendUrl+'/job-requests/in-progress', {
             method: 'GET',
             headers: { 
                 'Content-Type': 'application/json',
@@ -31,7 +31,7 @@ export default class ServicesAdapter {
     }
 
     static createJobRequest(body){
-        return fetch(backendUrl+'/jobs-requests', {
+        return fetch(backendUrl+'/job-requests', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -49,6 +49,26 @@ export default class ServicesAdapter {
                 'Authorization': 'Bearer ' + localStorage.getItem("access_key")
             },
             body: JSON.stringify(body)
+        })
+    }
+
+    static getCurrentJobMechanic(){
+        return fetch(jobsRoute + `/mechanics/current-job`, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer ' + localStorage.getItem('access_key')
+            }
+        })
+    }
+
+    static completeCurrentJob(current_job_id){
+        return fetch(jobsRoute+`/mechanics/complete-job/${current_job_id}`, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer ' + localStorage.getItem('access_key')
+            }
         })
     }
 }

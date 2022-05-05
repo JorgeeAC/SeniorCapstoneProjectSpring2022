@@ -17,7 +17,7 @@ import {
     ServicesWrapper,
   } from './ServicesElements'
 
-const Services = () => {
+const Services = ({ render }) => {
 
   const [ icons, setIcons ] = useState([Icon4, Icon5, Icon6]);
   const [ services, setServices ] = useState([]);
@@ -55,6 +55,7 @@ const Services = () => {
             service={service} 
             icon={getRandomIcon()} 
             user={user}
+            render={render}
           />)}
         </ServicesWrapper>
     </ServicesContainer>

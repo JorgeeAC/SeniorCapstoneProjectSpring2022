@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { FaBars } from "react-icons/fa";
 import { animateScroll as scroll } from "react-scroll";
+import JWTHandler from "../../../shared/JwtHandler";
 import {
   Nav,
   NavbarContainer,
@@ -84,7 +85,7 @@ const Navbar = ({ toggle }) => {
             </NavItem>
           </NavMenu>
           <NavBtn>
-            <NavBtnLink to="/signout"> Sign Out</NavBtnLink>
+            <NavBtnLink onClick={JWTHandler.deleteJWTToken} to="/signin"> Sign Out</NavBtnLink>
           </NavBtn>
         </NavbarContainer>
       </Nav>

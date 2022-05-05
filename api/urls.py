@@ -15,7 +15,7 @@ urlpatterns = [
 
     path('jobs/customers/current-job', CurrentJobView.as_view()),
 
-    path('jobs/mechanics/current-job/<int:current_job_id>', MechanicJobView.as_view()),
+    path('jobs/mechanics/current-job', MechanicJobView.as_view()),
     path('jobs/mechanics/complete-job/<int:current_job_id>', MechanicJobView.as_view()),
 
     path('jobs', JobList.as_view()),

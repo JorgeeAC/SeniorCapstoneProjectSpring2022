@@ -12,30 +12,31 @@ import ServicesAdapter from '../adapters/ServicesAdapter';
 const CustomerPortal = () => {
   const [ user, setUser ] = useState({});
   const [ currentJob, setCurrentJob ] = useState();
+  const [ render, setRender ] = useState(false);
 
   useEffect(() => {
     UserAdapter.getLoggedInUser()
     .then(resp => resp.json())
     .then(resp => {  
-      console.log(resp)
       setUser(resp)
       ServicesAdapter.getCurrentJob()
       .then(resp => resp.json())
       .then(setCurrentJob)
-      .catch(console.log) 
+      .catch((error) => {
+        setCurrentJob();
+        console.log(error);
+      }) 
     })
     .catch(console.log)
-  }, [])
+  }, [render])
 
 
-
-  console.log(currentJob)
   return (
     <div>
         <CustomerNavbar />
         <CustomerDisplay />
-        { currentJob ? <CustomerJobDisplay job={currentJob} />: <Services /> }
-        <CustomerDisplay {...homeObjOne}/>
+        { currentJob ? <CustomerJobDisplay job={currentJob} />: <Services render={setRender} /> }
+        <CustomerDisplay {...homeObjOne} render={setRender} />
         <h1> { 'Hello ! ' + user.fname+ ' ' + user.lname } </h1>
         <h2> { user.username } </h2>
         <h3> { user.address } </h3>

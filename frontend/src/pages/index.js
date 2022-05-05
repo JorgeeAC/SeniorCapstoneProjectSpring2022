@@ -6,15 +6,14 @@ import Navbar from '../components/Navbar';
 import Services from '../components/Services';
 import Sidebar from '../components/Sidebar';
 import Footer from '../components/Footer';
+import { useNavigate } from 'react-router-dom'; 
 
 const Home = () => {
     const [isOpen, setIsOpen] = useState(false);
+    const navigate = useNavigate();
 
-
-    const toggle = () => {
-        setIsOpen(!isOpen);
-    }
-
+    const toggle = () => setIsOpen(!isOpen);
+    const render = () => navigate('/profile');
 
   return (
     <>
@@ -23,7 +22,7 @@ const Home = () => {
         <HeroSection />
         <InfoSection {...homeObjOne} />
         <InfoSection {...homeObjTwo} />
-        <Services />
+        <Services render={render} />
         <InfoSection {...homeObjThree} />
         <Footer />
          

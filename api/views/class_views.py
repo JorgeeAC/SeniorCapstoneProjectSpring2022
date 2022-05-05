@@ -39,11 +39,11 @@ class CurrentJobView(APIView):
     def get(self, request):
         user = get_current_user(request)
         if user is not None:
-            job = Jobs.objects.filter(request_id__user_id=user.id)
+            job = Jobs.objects.filter(request_id__user_id=user.id, state='In Progress')
             if job.count() > 0:
                 return Response(JobsSerializer(job[0]).data, status=status.HTTP_200_OK)
             else:
-                job = JobRequests.objects.order_by('created_at').filter(user_id=user.id)
+                job = JobRequests.objects.order_by('created_at').filter(user_id=user.id, state='In Progress')
                 if job.count() > 0:
                     return Response(JobRequestSerializer(job[0]).data, status=status.HTTP_200_OK)
  
@@ -72,11 +72,11 @@ class MechanicJobView(APIView):
         return Response(JobsSerializer(current_job).data, status=status.HTTP_200_OK)
 
     # get current job for logged in mechanic
-    def get(self, request, current_job_id):
+    def get(self, request):
         try:
             user = get_current_user(request)
             mechanic = Mechanic.objects.get(u_ID=user.id)
-            current_job = Jobs.objects.get(id=current_job_id, mechanic_id=mechanic.mechanic_id)
+            current_job = Jobs.objects.get(mechanic_id=mechanic.mechanic_id, state='In Progress')
         except:
             return Response(status=status.HTTP_404_NOT_FOUND)
 
