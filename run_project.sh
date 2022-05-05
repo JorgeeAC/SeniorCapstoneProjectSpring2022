@@ -1,7 +1,6 @@
 #!/bin/bash
 
 python_variable='python'
-start_script='start'
 startup='false'
 
 help() {
