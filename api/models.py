@@ -46,7 +46,7 @@ class Vehicle(models.Model):
     registration_number = models.IntegerField(null=False, default=1)
 
     def __str__(self):
-        return self.vehicle_id, self.c_id.u_ID.__str__()
+        return self.vehicle_id, self.c_id.id.__str__()
 
 
 class Services(models.Model):
@@ -63,10 +63,11 @@ class JobRequests(models.Model):
     user_id = models.ForeignKey(User, on_delete=models.CASCADE)
     service_id = models.ForeignKey(Services, on_delete=models.CASCADE)
     created_at = models.DateTimeField(auto_now_add=True)
+    state = models.CharField(max_length=16, choices=JOB_CHOICES, default='In Progress')
 
     def __str__(self):
         return (f'{self.id}' 
-                f'{self.user_id.u_ID.__str__()}')
+                f'{self.user_id.id.__str__()}')
 
 class Jobs(models.Model):
     id = models.AutoField(primary_key=True)
@@ -76,7 +77,7 @@ class Jobs(models.Model):
 
     def __str__(self):
         return (f'{self.id}' 
-                f'{self.request_id.u_ID.__str__()}')
+                f'{self.request_id.id.__str__()}')
 
 
 class Reviews(models.Model):
