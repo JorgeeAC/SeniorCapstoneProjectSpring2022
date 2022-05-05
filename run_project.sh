@@ -33,4 +33,4 @@ fi
 echo "Running Django and React Servers"
 cd 'frontend/'
 npm i
-webpack --mode development --watch & cd .. && $python_variable manage.py runserver
+npm run dev & cd .. && $python_variable manage.py runserver
