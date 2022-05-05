@@ -7,8 +7,7 @@
     "dev": "webpack --mode development --watch",
     "build": "webpack --mode production",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "webpack --mode development --watch & \ncd .. && python ./manage.py runserver",
-    "start2": "webpack --mode development --watch & \ncd .. && python3 ./manage.py runserver"
+    "start": "webpack --mode development --watch & \ncd .. && python ./manage.py runserver"
   },
   "keywords": [],
   "author": "",
